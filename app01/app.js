@@ -7,7 +7,8 @@ const
   logger = require('morgan'),
   bParser = require('body-parser'),
   compression = require('compression'),
-  path = require('path');
+  path = require('path'),
+  mongoose = require('mongoose');
 //=============================================================================
 /**
  * Create Express App
