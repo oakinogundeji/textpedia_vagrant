@@ -9,6 +9,7 @@ const
   compression = require('compression'),
   path = require('path'),
   config = require('./config/config'),
+  ejsLayout = require('express-ejs-layouts'),
   mongoose = require('mongoose');
 //=============================================================================
 /**
@@ -25,7 +26,8 @@ const
   port = process.env.port || 3030,
   env = config.env,
   host = config.host,
-  dBURL = config.dBURL;
+  dBURL = config.dBURL,
+  routes = require('./routes/routes');
 var db;
 //=============================================================================
 /**
@@ -37,6 +39,10 @@ app.disable('x-powered-by');
 app.set('port', port);
 app.set('env', env);
 app.set('host', host);
+app.set('views', path.join(__dirname, '/views'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('layout', 'layout');
 //=============================================================================
 /**
  * dBase connection
@@ -68,7 +74,9 @@ process.on('SIGINT', function () {
 app.use(logger('dev'));
 app.use(bParser.json());
 app.use(bParser.urlencoded({extended: true}));
+app.use(ejsLayout);
 app.use(compression());
+app.use(express.static(path.join(__dirname, 'public')));
 //=============================================================================
 /**
  * Routes
@@ -78,6 +86,7 @@ app.get('/test', function (req, res) {
   return res.status(200).
     send('<marquee><h1>Yaaaay... it works!!!</h1></marquee>');
 });
+app.use('/', routes);
 //=============================================================================
 /**
  * Export Module
