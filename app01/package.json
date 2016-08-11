@@ -1,0 +1,28 @@
+{
+  "name": "textpedia",
+  "version": "1.0.0",
+  "description": "An app that provides reports to users which serves as preliminary research on keywords passed to the app via SMS",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oakinogundeji/textpedia.git"
+  },
+  "keywords": [
+    "sms",
+    "email",
+    "research",
+    "wikipedia",
+    "node",
+    "express",
+    "python"
+  ],
+  "author": "Telios WebDev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oakinogundeji/textpedia/issues"
+  },
+  "homepage": "https://github.com/oakinogundeji/textpedia#readme"
+}
