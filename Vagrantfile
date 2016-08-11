@@ -10,7 +10,7 @@ Vagrant.configure(2) do |config|
   end
   # create app vm
   config.vm.define "app01" do |app_config|
-      app_config.vm.hostname = "lb01"
+      app_config.vm.hostname = "app01"
       app_config.vm.synced_folder "./app01", "/vagrant"
       app_config.vm.network "private_network", ip: "192.168.15.11"
       app_config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
