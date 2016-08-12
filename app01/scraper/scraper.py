@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup as BSoup
 def scrape(k_words):
     print('input =', k_words)
     baseURL = 'https://en.wikipedia.org/wiki/'
-    targetURL = baseURL + k_words[0]
+    targetURL = baseURL + k_words
     regex = '^\[\d\]$'
     #print('targetURL', targetURL)
     try:
@@ -58,7 +58,10 @@ def Main():
     parser.add_argument('k_words', type=str, nargs='+')
     #parser.add_argument('k_words', type=str)
     args = parser.parse_args()
-    result = scrape(args.k_words)
+    print('args', args.k_words)
+    for arg in args.k_words:
+        scrape(arg)
+    #result = scrape(args.k_words)
     #print('result =', result)
     #sys.stdout.flush()
 
