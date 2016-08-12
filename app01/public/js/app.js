@@ -10,6 +10,8 @@ const
  * Module Config
  */
 //=============================================================================
+Vue.use(require('vue-resource'));
+Vue.http.options.root = '/root';
 Vue.use(VueRouter);
 //=============================================================================
 /**
@@ -19,7 +21,8 @@ Vue.use(VueRouter);
 const
   Home = require('./components/app_home'),
   Sign_Up = require('./components/app_signup'),
-  How = require('./components/app_how-it-works');
+  How = require('./components/app_how-it-works'),
+  Confirm = require('./components/app_confirm');
 //=============================================================================
 /**
  * Create baseVM
@@ -35,10 +38,16 @@ const app = Vue.extend({
     'app-nav': require('./components/app_nav'),
     'app-home': Home,
     'app-how': How,
-    'app-sign': Sign_Up
+    'app-sign': Sign_Up,
+    'app_confirm': Confirm
   },
   methods: {},
-  events: {},
+  events: {
+    'show-confirm': function () {
+      console.log('received show-confirm event');
+      return this.$route.router.go({name: 'confirm'});
+    }
+  },
   ready: function () {
     this.$route.router.go({name: 'home'});
   }
@@ -66,6 +75,10 @@ router.map({
   '/how': {
     name: 'how',
     component: How
+  },
+  '/confirm': {
+    name: 'confirm',
+    component: Confirm
   }
 });
 //=============================================================================

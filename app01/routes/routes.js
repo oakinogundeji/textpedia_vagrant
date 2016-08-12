@@ -13,6 +13,10 @@ const
 router.get('/', function (req, res) {
   return res.status(200).render('pages/index')
 });
+router.post('/submit', function (req, res) {
+  console.log('data from vue', req.body.data);
+  return res.status(200).json('Got it!');
+});
 //=============================================================================
 /**
  * Export Module
