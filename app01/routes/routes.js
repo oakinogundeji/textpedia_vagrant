@@ -31,33 +31,10 @@ router.post('/confirm', function (req, res) {
   return res.status(200).json('Got it!');
 });
 //API Routes
-/*router.post('/scrape', function (req, res) {
-  console.log('scrape user phone number %s', req.body.p_num);
-  console.log('scrape keyword', req.body.k_word);
-  //NB child_process pattern is 'cmd, [file_path, args.....]'
-  var
-    cp = require('child_process'),
-    scraper = cp.spawn('python', [SCRAPER_PATH, req.body.k_word]),
-    chunk = '';
-
-  scraper.stdout.on('data', function (data) {
-    //console.log('scraper sending data:', data.toString());
-    chunk += data
-  });
-  scraper.stdout.on('close', function () {
-    console.log('scraper finished sending data');
-    console.log('data =', chunk);
-    return res.status(200).json(chunk)
-  });
-  scraper.stderr.on('data', function (err) {
-    console.log('there was an err with scraper');
-    return console.error(err.toString());
-  });
-  //return res.status(200).json('Got it!');
-});*/
 router.post('/scrape', function (req, res) {
   console.log('scrape user phone number %s', req.body.p_num);
   console.log('scrape keyword', req.body.k_words);
+  //NB child_process pattern is 'cmd, [file_path, args.....]'
   var
     words = req.body.k_words.split(','),
     args = [SCRAPER_PATH].concat(words),
