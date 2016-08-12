@@ -51,6 +51,7 @@
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "vue": "^1.0.26",
-    "vue-resource": "^0.9.3"
+    "vue-resource": "^0.9.3",
+    "vue-router": "^0.7.13"
   }
 }

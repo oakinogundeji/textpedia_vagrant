@@ -2,12 +2,76 @@
  * Module Dependencies
  */
 //=============================================================================
-const Vue = require('vue');
+const
+  Vue = require('vue'),
+  VueRouter = require('vue-router')
+//=============================================================================
+/**
+ * Module Config
+ */
+//=============================================================================
+Vue.use(VueRouter);
+//=============================================================================
+/**
+ * VM Components
+ */
+//=============================================================================
+const
+  Home = require('./components/app_home'),
+  Sign_Up = require('./components/app_signup'),
+  How = require('./components/app_how-it-works');
 //=============================================================================
 /**
  * Create baseVM
  */
 //=============================================================================
-const vm = new Vue({
-  template: require('../../views/pages/index.html')
+const app = Vue.extend({
+  template: require('./template.html'),
+  data: () => {
+    return {};
+  },
+  computed: {},
+  components: {
+    'app-nav': require('./components/app_nav'),
+    'app-home': Home,
+    'app-how': How,
+    'app-sign': Sign_Up
+  },
+  methods: {},
+  events: {},
+  ready: function () {
+    this.$route.router.go({name: 'home'});
+  }
 });
+//=============================================================================
+/**
+ * Create router instance
+ */
+//=============================================================================
+router = new VueRouter();
+//=============================================================================
+/**
+ * Define Routes
+ */
+//=============================================================================
+router.map({
+  '/home': {
+    name: 'home',
+    component: Home
+  },
+  '/sign-up': {
+    name: 'sign-up',
+    component: Sign_Up
+  },
+  '/how': {
+    name: 'how',
+    component: How
+  }
+});
+//=============================================================================
+/**
+ * Start router
+ */
+//=============================================================================
+router.start(app, '#app-main');
+//=============================================================================
