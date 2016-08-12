@@ -12,8 +12,8 @@ module.exports = {
       if(this.email.trim() && this.phoneNumber.trim()) {
         console.log('valid creds');
         var data = {
-          email: this.email,
-          phoneNumber: this.phoneNumber
+          email: this.email.trim(),
+          phoneNumber: this.phoneNumber.trim()
         };
         this.$http.post(this.submitURL, {
           data: data
@@ -25,7 +25,7 @@ module.exports = {
           catch(function (info) {
             return console.log('yawa gas', info);
           });
-        this.email = this.phoneNumber = '';
+        return this.email = this.phoneNumber = '';
       }
       else {
         return console.log('oops');

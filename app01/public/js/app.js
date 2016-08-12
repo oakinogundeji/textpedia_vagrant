@@ -44,8 +44,10 @@ const app = Vue.extend({
   methods: {},
   events: {
     'show-confirm': function () {
-      console.log('received show-confirm event');
       return this.$route.router.go({name: 'confirm'});
+    },
+    'confirmed': function () {
+      return this.$route.router.go({name: 'home'});
     }
   },
   ready: function () {
