@@ -3,8 +3,11 @@
  */
 //=============================================================================
 const
+  os = require('os'),
   express = require('express'),
-  PythonShell = require('python-shell'),
+  nodemailer = require('nodemailer'),
+  sgTransport = require('nodemailer-sendgrid-transport'),
+  config = require('../config/config'),
   router = express.Router();
 //=============================================================================
 /**
@@ -13,7 +16,16 @@ const
 //=============================================================================
 const
   SCRAPER_PATH = '/home/telios/webdev_projects/txtpedia/app01/textpedia/app01/scraper/scraper.py',
-  PYTHON_PATH = '/usr/bin/python';
+  PYTHON_PATH = '/usr/bin/python',
+  testEmail = 'oakinogundeji@gmail.com',
+  sgtOptions = {
+    auth: {
+        api_user: config.SendGrid.username,
+        api_key: config.SendGrid.password
+      }
+    },
+  mailer = nodemailer.createTransport(sgTransport(sgtOptions));
+//=============================================================================
 /**
  * Routes
  */
@@ -47,9 +59,24 @@ router.post('/scrape', function (req, res) {
   });
   scraper.stdout.on('close', function () {
     console.log('scraper finished sending data');
-    console.log('data =>');
-    console.log(chunk);
-    //return res.status(200).json(chunk)
+    console.log('data =', chunk);
+    //compose email
+    var email = {
+      to: testEmail,
+      from: 'research@textpedia.com',
+      subject: 'Your research results',
+      text: 'Hi, ' + os.EOL + os.EOL +'Thanks for using the Textpedia service, your' +
+        ' research results are:' + os.EOL + os.EOL + chunk
+    };
+    //send email
+    mailer.sendMail(email, function(err, res) {
+      if(err) {
+        console.log('There was an error sending the report');
+        console.error(err);
+        }
+        console.log('The report was successfully sent');
+        console.log(res);
+    });
   });
   scraper.stderr.on('data', function (err) {
     console.log('there was an err with scraper');

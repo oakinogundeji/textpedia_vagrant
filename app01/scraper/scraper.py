@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup as BSoup
 
 
 def scrape(k_words):
-    print('Key Word:', k_words)
+    print('Key Word:', k_words, ': \n')
     baseURL = 'https://en.wikipedia.org/wiki/'
     targetURL = baseURL + k_words
     regex = '^\[\d\]$'

@@ -48,6 +48,8 @@
     "express-ejs-layouts": "^2.2.0",
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.5.8",
+    "nodemailer": "^2.5.0",
+    "nodemailer-sendgrid-transport": "^0.2.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "vue": "^1.0.26",
